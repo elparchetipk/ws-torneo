@@ -8,7 +8,7 @@ Este es un proyecto de entrenamiento para **WorldSkills 2025 - Habilidad 17 Tecn
 
 ### Stack Tecnológico Obligatorio
 
-- **Backend:** PHP/Laravel 10+ con SQLite
+- **Backend:** PHP/Laravel 11 con SQLite
 - **Frontend:** React 18+ con Vite y pnpm (gestor de paquetes)
 - **Build Tool:** Vite (desarrollo rápido y hot reload)
 - **Package Manager:** pnpm (rápido y eficiente en espacio)
