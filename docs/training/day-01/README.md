@@ -1,86 +1,138 @@
-# 📚 DÍA 1: Fundamentos y Configuración del Entorno
+# � Día 1: Fundamentos Laravel + React
 
-**Duración total:** 8 horas  
-**Objetivo:** Crear automatismos para setup y desarrollo básico
-
----
-
-## 📋 Agenda del Día
-
-### 🌅 Sesión Matutina (4 horas)
-
-#### ⏰ 1.1 Configuración del Entorno de Desarrollo (1 hora)
-- **Archivos:** [`setup-practice.md`](setup-practice.md)
-- **Objetivo:** Setup Laravel + React en < 10 minutos
-- **Materiales:** Script de automatización, troubleshooting guide
-
-#### ⏰ 1.2 Migraciones y Modelos Laravel (1.5 horas)  
-- **Archivos:** [`migrations-exercise.md`](migrations-exercise.md)
-- **Objetivo:** BD complejas con relaciones múltiples
-- **Materiales:** Ejemplos de blog system, templates
-
-#### ⏰ 1.3 APIs RESTful con Laravel (1.5 horas)
-- **Archivos:** [`api-rest-guide.md`](api-rest-guide.md)  
-- **Objetivo:** Endpoints REST con manejo de errores
-- **Materiales:** Resource Controllers, API Resources, Form Requests
-
-### 🌆 Sesión Vespertina (4 horas)
-
-#### ⏰ 1.4 React Hooks y Consumo de APIs (2 horas)
-- **Archivos:** [`react-hooks-guide.md`](react-hooks-guide.md)
-- **Objetivo:** Hooks modernos para APIs RESTful
-- **Materiales:** Custom hooks, loading states, error handling
-
-#### ⏰ 1.5 Integración Frontend-Backend (2 horas)
-- **Archivos:** [`integration-guide.md`](integration-guide.md)
-- **Objetivo:** Comunicación React ↔ Laravel
-- **Materiales:** Proxy setup, CORS config, form validation
+**Duración:** 8 horas  
+**Objetivo:** Establecer bases sólidas para el desarrollo rápido en WorldSkills
 
 ---
 
-## 🎯 Desafío del Día
+## 🎯 **Agenda del Día**
 
-**Simulacro cronometrado (2 horas):** CRUD completo con frontend y backend funcionales
+### **Mañana (4 horas)**
 
-**Archivos del desafío:**
-- [`challenge-day1.md`](challenge-day1.md) - Descripción del reto
-- [`challenge-rubric.md`](challenge-rubric.md) - Rúbrica de evaluación
+1. **[Setup y Configuración](setup-practice.md)** (1.5 horas)
+2. **[Migraciones y Modelos](migrations-exercise.md)** (2.5 horas)
 
----
+### **Tarde (4 horas)**
 
-## 📁 Archivos de este Día
+3. **[API REST](api-rest-guide.md)** (2 horas)
+4. **[React Hooks](react-hooks-guide.md)** (1 hora)
+5. **[Integración Frontend-Backend](integration-guide.md)** (1 hora)
 
-- `setup-practice.md` - Ejercicios de configuración
-- `migrations-exercise.md` - Ejercicio de blog system  
-- `api-rest-guide.md` - Guía de APIs REST
-- `react-hooks-guide.md` - Guía de React hooks
-- `integration-guide.md` - Guía de integración
-- `challenge-day1.md` - Desafío final del día
-- `challenge-rubric.md` - Rúbrica de evaluación
+### **🏆 Desafío Final**
+
+6. **[Challenge Día 1](challenge-day1.md)** (2 horas cronometradas)
 
 ---
 
-## 🎓 Objetivos de Aprendizaje
+## 📚 **Recursos del Día**
 
-Al final del Día 1, los competidores deben poder:
-
-✅ **Setup automático:** Entorno Laravel + React en < 10 minutos  
-✅ **Migraciones rápidas:** Crear BD complejas con relaciones  
-✅ **APIs básicas:** Endpoints REST con validaciones  
-✅ **React moderno:** Componentes con hooks y API consumption  
-✅ **Integración:** Comunicación frontend ↔ backend fluida
+| Archivo                  | Descripción              | Duración | Tipo                   |
+| ------------------------ | ------------------------ | -------- | ---------------------- |
+| `setup-practice.md`      | Configuración de entorno | 90 min   | 📖 Teoría + Práctica   |
+| `migrations-exercise.md` | Base Datos y Eloquent    | 150 min  | 🛠️ Ejercicios Hands-On |
+| `api-rest-guide.md`      | Endpoints y Validaciones | 120 min  | 💻 Desarrollo Guiado   |
+| `react-hooks-guide.md`   | Hooks personalizados     | 60 min   | ⚛️ React Patterns      |
+| `integration-guide.md`   | Frontend ↔ Backend       | 60 min   | 🔗 Integración         |
+| `challenge-day1.md`      | **DESAFÍO FINAL**        | 120 min  | 🏆 **Evaluación**      |
 
 ---
 
-## 📊 Evaluación
+## ⚡ **Competencias Clave Desarrolladas**
 
-**Rúbrica de evaluación del día:**
-- **Velocidad de Setup (25%):** Tiempo para configurar entorno
-- **Modelado de Datos (35%):** Correctitud de migraciones y relaciones  
-- **APIs Básicas (40%):** Funcionalidad de endpoints CRUD
+### **Backend (Laravel)**
 
-**Criterios de éxito:**
-- Setup completo en menos de 8 minutos ⭐⭐⭐⭐
-- Migraciones con relaciones correctas
-- APIs REST funcionales con validaciones
-- Frontend consumiendo APIs correctamente
+✅ **Setup automatizado** en < 10 minutos  
+✅ **Migraciones complejas** con relaciones y índices  
+✅ **Modelos Eloquent** con scopes y mutators  
+✅ **API REST completa** con Resource Controllers  
+✅ **Validaciones robustas** con Form Requests  
+✅ **Resources** para serialización de datos
+
+### **Frontend (React + Vite)**
+
+✅ **Configuración Vite** con proxy para desarrollo  
+✅ **Hooks personalizados** para lógica de negocio  
+✅ **Manejo de estado** con useState y useEffect  
+✅ **Servicios API** con axios y manejo de errores  
+✅ **Componentes reutilizables** con props tipadas
+
+### **Integración**
+
+✅ **Comunicación HTTP** entre tecnologías  
+✅ **Manejo de CORS** y headers  
+✅ **Estados de loading** y error handling  
+✅ **Sincronización de datos** en tiempo real
+
+---
+
+## 🎯 **Objetivos de Aprendizaje**
+
+Al completar el Día 1, cada competidor debe dominar:
+
+### **Velocidad de Setup**
+
+- ⏱️ Proyecto completo Laravel + React en **< 15 minutos**
+- ⏱️ Migración + Modelo + Controller en **< 10 minutos**
+- ⏱️ Frontend con hooks funcionando en **< 15 minutos**
+
+### **Calidad de Código**
+
+- 🏗️ **Arquitectura** organizada en capas
+- 🛡️ **Validaciones** en frontend y backend
+- 🧪 **Testing manual** con datos de prueba
+- 📱 **UI responsiva** y user-friendly
+
+### **Troubleshooting**
+
+- 🔍 **Debug** rápido de errores comunes
+- 🔧 **Configuración** de herramientas de desarrollo
+- 📊 **Monitoring** de performance básico
+
+---
+
+## 📊 **Métricas de Éxito del Día**
+
+| Competencia         | Tiempo Meta | Nivel Requerido     |
+| ------------------- | ----------- | ------------------- |
+| **Setup Completo**  | < 15 min    | Automatizado        |
+| **CRUD Backend**    | < 30 min    | Con validaciones    |
+| **Frontend Básico** | < 25 min    | Con hooks           |
+| **Integración**     | < 15 min    | Sin errores         |
+| **Desafío Final**   | 120 min     | **≥ 80/100 puntos** |
+
+---
+
+## 🚀 **Preparación para Día 2**
+
+Con las bases del Día 1, estaremos listos para:
+
+- **Relaciones complejas** entre modelos
+- **Autenticación** con Sanctum
+- **Testing automatizado** con PHPUnit y Jest
+- **Optimización** de queries y componentes
+
+---
+
+## � **Tips para el Instructor**
+
+### **Gestión del Tiempo**
+
+- ⏰ Usar **cronómetros visibles** para cada sección
+- 🔄 **Checkpoints** cada 30 minutos para verificar progreso
+- 🚨 **Alertas** cuando alguien se atrasa
+
+### **Metodología**
+
+- 👨‍💻 **Live coding** para conceptos nuevos
+- 🧑‍🤝‍🧑 **Pair programming** en ejercicios complejos
+- 🔧 **Troubleshooting colaborativo** de errores
+
+### **Evaluación Continua**
+
+- ✅ **Mini-quizzes** después de cada sección
+- 🏃‍♂️ **Speed coding** para practicar velocidad
+- 📝 **Peer review** del código generado
+
+---
+
+**🔥 Día 1: ¡La base que determinará el éxito en WorldSkills 2025!**

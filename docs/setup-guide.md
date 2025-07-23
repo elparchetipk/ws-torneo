@@ -9,6 +9,7 @@
 ## 📋 Pre-requisitos
 
 ### Software Necesario:
+
 - **PHP 8.1+** con extensiones: sqlite3, pdo_sqlite, openssl, json, tokenizer
 - **Composer 2.0+** (gestor de dependencias PHP)
 - **Node.js 18+** (para frontend)
@@ -18,6 +19,7 @@
 - **Postman** (testing de APIs)
 
 ### Verificación rápida:
+
 ```bash
 # Verificar instalaciones
 php --version && php -m | grep -E "(sqlite3|pdo_sqlite)"
@@ -45,7 +47,7 @@ touch database/database.sqlite
 
 # 3. Generar modelos con migraciones, controladores y resources
 php artisan make:model Country -mcr
-php artisan make:model Team -mcr  
+php artisan make:model Team -mcr
 php artisan make:model Player -mcr
 php artisan make:model Match -mcr
 
@@ -74,7 +76,7 @@ pnpm add axios react-router-dom
 pnpm add -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
-# 5. Iniciar servidor de desarrollo  
+# 5. Iniciar servidor de desarrollo
 pnpm dev
 # ✅ React disponible en http://localhost:3000
 ```
@@ -82,9 +84,10 @@ pnpm dev
 ### Paso 3: Configuración de Comunicación (1-2 minutos)
 
 #### Frontend - Configurar Proxy (vite.config.js):
+
 ```js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
@@ -95,13 +98,14 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
-      }
-    }
-  }
-})
+      },
+    },
+  },
+});
 ```
 
 #### Backend - Configurar CORS (Laravel):
+
 ```bash
 # Instalar Laravel Sanctum para CORS
 php artisan install:api
@@ -112,6 +116,7 @@ php artisan install:api
 ## ⏱️ Cronómetro de Setup
 
 ### Tiempos Objetivo por Componente:
+
 - **Verificación pre-requisitos:** 30 segundos
 - **Creación proyecto Laravel:** 2 minutos
 - **Creación proyecto React + Vite:** 1.5 minutos
@@ -129,6 +134,7 @@ php artisan install:api
 ### Problemas Comunes:
 
 #### Laravel no inicia:
+
 ```bash
 # Verificar permisos
 chmod -R 775 storage bootstrap/cache
@@ -137,6 +143,7 @@ php artisan key:generate
 ```
 
 #### Frontend no conecta con API:
+
 ```bash
 # Verificar puertos
 netstat -tulpn | grep :8000  # Laravel
@@ -144,6 +151,7 @@ netstat -tulpn | grep :3000  # React
 ```
 
 #### pnpm no funciona:
+
 ```bash
 # Reinstalar pnpm
 npm uninstall -g pnpm
@@ -151,6 +159,7 @@ npm install -g pnpm@latest
 ```
 
 #### Errores de CORS:
+
 ```php
 // En config/cors.php
 'paths' => ['api/*', 'sanctum/csrf-cookie'],
@@ -162,14 +171,16 @@ npm install -g pnpm@latest
 ## ✅ Verificación Final
 
 ### Checklist de Setup Exitoso:
+
 - [ ] Laravel responde en http://localhost:8000
-- [ ] React responde en http://localhost:3000  
+- [ ] React responde en http://localhost:3000
 - [ ] Base de datos SQLite creada y conectada
 - [ ] Proxy Vite → Laravel configurado
 - [ ] CORS habilitado en Laravel
 - [ ] Postman listo para testing de APIs
 
 ### Test de Comunicación:
+
 ```bash
 # Crear ruta de prueba en Laravel (routes/api.php)
 Route::get('/test', function () {
@@ -185,6 +196,7 @@ fetch('/api/test').then(r => r.json()).then(console.log)
 ## 📝 Scripts de Automatización
 
 ### Script completo de setup (setup.sh):
+
 ```bash
 #!/bin/bash
 echo "🚀 Iniciando setup WorldSkills..."
@@ -197,7 +209,7 @@ sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/' .env
 php artisan key:generate
 php artisan serve &
 
-# Frontend  
+# Frontend
 cd ..
 pnpm create vite ws-torneo-frontend --template react
 cd ws-torneo-frontend
