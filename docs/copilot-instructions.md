@@ -1,0 +1,411 @@
+# Copilot Instructions - Proyecto WorldSkills 2025
+
+## Contexto del Proyecto
+
+Este es un proyecto de entrenamiento para **WorldSkills 2025 - Habilidad 17 Tecnologías Web**. El objetivo es preparar competidores para desarrollar una **API REST completa** para la gestión de un torneo de fútbol femenino suramericano en **4 horas**.
+
+**siempre** generar documentación amplia y detallada (paso a paso) para llevar el proyecto de ZERO a HERO. Paso 1: .... Paso2. :....explicado con "plastilina"
+
+### Stack Tecnológico Obligatorio
+
+- **Backend:** PHP/Laravel 10+ con SQLite
+- **Frontend:** React 18+ con Vite y pnpm (gestor de paquetes)
+- **Build Tool:** Vite (desarrollo rápido y hot reload)
+- **Package Manager:** pnpm (rápido y eficiente en espacio)
+- **Estilos:** CSS nativo o Tailwind CSS
+- **Testing:** Postman para APIs
+
+## Prioridades de Desarrollo
+
+### CRÍTICO (Debe completarse en las primeras 3 horas)
+
+1. **RF001-RF005:** CRUDs básicos (países, equipos, jugadoras, partidos, resultados)
+2. **RF006:** Tabla de posiciones con cálculos automáticos
+3. **Frontend funcional:** Interfaces básicas para operaciones principales
+
+### OPCIONAL (Solo si queda tiempo)
+
+- RF007-RF010: Funcionalidades avanzadas
+- Mejoras de UI/UX
+- Optimizaciones de rendimiento
+
+## Reglas de Código Específicas
+
+### Backend Laravel
+
+```php
+// Estructura de controladores - usar Resource Controllers
+class TeamController extends Controller
+{
+    public function index() { /* GET /api/teams */ }
+    public function store(Request $request) { /* POST /api/teams */ }
+    public function show($id) { /* GET /api/teams/{id} */ }
+    public function update(Request $request, $id) { /* PUT /api/teams/{id} */ }
+    public function destroy($id) { /* DELETE /api/teams/{id} */ }
+}
+
+// Usar API Resources para respuestas consistentes
+return new TeamResource($team);
+
+// Validaciones siempre con Form Requests
+public function store(StoreTeamRequest $request)
+```
+
+### Modelos y Relaciones Obligatorias
+
+```php
+// Country model
+public function team() { return $this->hasOne(Team::class); }
+
+// Team model
+public function country() { return $this->belongsTo(Country::class); }
+public function players() { return $this->hasMany(Player::class); }
+public function homeMatches() { return $this->hasMany(Match::class, 'home_team_id'); }
+public function awayMatches() { return $this->hasMany(Match::class, 'away_team_id'); }
+
+// Player model
+public function team() { return $this->belongsTo(Team::class); }
+
+// Match model
+public function homeTeam() { return $this->belongsTo(Team::class, 'home_team_id'); }
+public function awayTeam() { return $this->belongsTo(Team::class, 'away_team_id'); }
+```
+
+### Validaciones del Dominio Deportivo
+
+```php
+// Validaciones críticas que SIEMPRE deben implementarse
+'iso_code' => 'required|string|size:3|unique:countries',
+'jersey_number' => 'required|integer|min:1|max:99|unique:players,jersey_number,NULL,id,team_id,' . $request->team_id,
+'position' => 'required|in:Portera,Defensora,Mediocampista,Delantera',
+'home_team_id' => 'required|exists:teams,id|different:away_team_id',
+'phase' => 'required|in:Fase de Grupos,Cuartos,Semifinal,Tercer Puesto,Final',
+'status' => 'required|in:Programado,En Curso,Finalizado,Suspendido'
+```
+
+### Frontend React
+
+```jsx
+// Usar hooks personalizados para APIs
+const useApi = (url) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // fetch logic
+  }, [url]);
+
+  return { data, loading, error };
+};
+
+// Componentes reutilizables obligatorios
+const DataTable = ({ data, columns, onEdit, onDelete }) => {
+  /* ... */
+};
+const FormModal = ({ isOpen, onClose, onSubmit, fields }) => {
+  /* ... */
+};
+const LoadingSpinner = () => {
+  /* ... */
+};
+```
+
+### Configuración Vite Específica
+
+```js
+// vite.config.js - Configuración optimizada para desarrollo
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+  },
+});
+```
+
+```js
+// main.jsx - Punto de entrada de la aplicación
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
+### Scripts pnpm recomendados
+
+```json
+// package.json - Scripts adicionales útiles
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+  }
+}
+```
+
+## Estructura de Proyecto Requerida
+
+### Backend Laravel
+
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   ├── CountryController.php
+│   │   ├── TeamController.php
+│   │   ├── PlayerController.php
+│   │   ├── MatchController.php
+│   │   └── StandingController.php
+│   ├── Requests/
+│   │   ├── StoreCountryRequest.php
+│   │   ├── StoreTeamRequest.php
+│   │   └── ...
+│   └── Resources/
+│       ├── CountryResource.php
+│       ├── TeamResource.php
+│       └── ...
+├── Models/
+│   ├── Country.php
+│   ├── Team.php
+│   ├── Player.php
+│   └── Match.php
+database/
+├── migrations/
+└── seeders/
+```
+
+### Frontend React + Vite
+
+```
+ws-torneo-frontend/
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── DataTable.jsx
+│   │   │   ├── FormModal.jsx
+│   │   │   └── LoadingSpinner.jsx
+│   │   ├── countries/
+│   │   ├── teams/
+│   │   ├── players/
+│   │   └── matches/
+│   ├── hooks/
+│   │   ├── useApi.js
+│   │   └── useTeams.js
+│   ├── services/
+│   │   └── api.js
+│   ├── pages/
+│   │   ├── Countries.jsx
+│   │   ├── Teams.jsx
+│   │   └── Standings.jsx
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── index.html
+├── vite.config.js
+├── package.json
+└── pnpm-lock.yaml
+```
+
+## Restricciones de Tiempo
+
+### Distribución temporal obligatoria:
+
+- **Minuto 0-60:** Setup del proyecto, migraciones, modelos, seeders
+- **Minuto 60-120:** APIs de países, equipos y jugadoras (RF001-RF003)
+- **Minuto 120-180:** APIs de partidos y resultados (RF004-RF005)
+- **Minuto 180-240:** Frontend básico y tabla de posiciones (RF006)
+
+### Red flags (indicadores de que vas lento):
+
+- Más de 15 minutos en configuración inicial
+- Más de 30 minutos por CRUD básico
+- Más de 45 minutos en tabla de posiciones
+- Comenzar frontend después del minuto 180
+
+## Datos de Prueba Obligatorios
+
+### Países (mínimo 8):
+
+```php
+// Seeder debe incluir estos países exactos
+['ARG', 'Argentina', 'CONMEBOL'],
+['BRA', 'Brasil', 'CONMEBOL'],
+['CHI', 'Chile', 'CONMEBOL'],
+['COL', 'Colombia', 'CONMEBOL'],
+['ECU', 'Ecuador', 'CONMEBOL'],
+['PAR', 'Paraguay', 'CONMEBOL'],
+['PER', 'Perú', 'CONMEBOL'],
+['URU', 'Uruguay', 'CONMEBOL']
+```
+
+### Partidos de prueba:
+
+- Mínimo 8 partidos en diferentes fases
+- Al menos 4 partidos finalizados con resultados
+- Datos suficientes para generar tabla de posiciones realista
+
+## Endpoints API Obligatorios
+
+### Básicos (implementar primero):
+
+```
+GET|POST /api/countries
+GET|PUT|DELETE /api/countries/{id}
+GET|POST /api/teams
+GET|PUT|DELETE /api/teams/{id}
+GET|POST /api/players
+GET|PUT|DELETE /api/players/{id}
+GET|POST /api/matches
+GET|PUT|DELETE /api/matches/{id}
+POST|PUT /api/matches/{id}/result
+GET /api/standings
+```
+
+### Avanzados (si queda tiempo):
+
+```
+GET /api/teams/{id}/players
+GET /api/matches/team/{team_id}
+GET /api/matches/date/{date}
+GET /api/matches/phase/{phase}
+GET /api/statistics/general
+```
+
+## Criterios de Éxito
+
+### Mínimo viable (para aprobar):
+
+- ✅ Todos los CRUDs básicos funcionando (RF001-RF005)
+- ✅ Base de datos con relaciones correctas
+- ✅ Al menos 20 endpoints API respondiendo
+- ✅ Frontend básico para 3 entidades principales
+- ✅ Tabla de posiciones calculando correctamente
+
+### Excelencia (para destacar):
+
+- ✅ Todo lo anterior + RF006-RF007
+- ✅ Frontend completo con todas las funcionalidades
+- ✅ Validaciones robustas y manejo de errores
+- ✅ Código limpio y bien estructurado
+- ✅ Interface atractiva y responsive
+
+## Comandos de Setup Rápido
+
+### Backend:
+
+```bash
+composer create-project laravel/laravel ws-torneo-api
+cd ws-torneo-api
+php artisan make:model Country -mcr
+php artisan make:model Team -mcr
+php artisan make:model Player -mcr
+php artisan make:model Match -mcr
+php artisan migrate:fresh --seed
+php artisan serve
+```
+
+### Frontend:
+
+```bash
+# Instalar pnpm globalmente si no está instalado
+npm install -g pnpm
+
+# Crear proyecto React con Vite
+pnpm create vite ws-torneo-frontend --template react
+cd ws-torneo-frontend
+
+# Instalar dependencias
+pnpm install
+
+# Instalar dependencias adicionales necesarias
+pnpm add axios react-router-dom
+
+# Opcional: Instalar Tailwind CSS para estilos
+pnpm add -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+# Iniciar servidor de desarrollo (con hot reload)
+pnpm dev
+```
+
+### Ventajas de Vite + pnpm en Competencia
+
+**¿Por qué Vite?**
+
+- ⚡ **Start-up ultrarrápido:** Servidor de desarrollo listo en < 3 segundos
+- 🔥 **Hot Module Replacement:** Cambios instantáneos sin reload completo
+- 📦 **Bundle optimizado:** Build de producción más pequeño y rápido
+- 🛠️ **Zero-config:** Configuración mínima, funciona out-of-the-box
+
+**¿Por qué pnpm?**
+
+- 🚀 **Instalación 3x más rápida** que npm
+- 💾 **Ahorra espacio en disco** mediante enlaces simbólicos
+- 🔒 **Determinístico:** Lock file más confiable
+- ⚙️ **Compatible** con todos los paquetes de npm
+
+**Tiempo ahorrado en competencia:**
+
+- Setup inicial: **2-3 minutos menos** vs create-react-app
+- Instalación de dependencias: **30-60 segundos menos**
+- Desarrollo: **Hot reload instantáneo** = menos interrupciones
+- Build final: **50% más rápido** para demo
+
+## Notas Importantes
+
+- **NO** usar autenticación/autorización (consume tiempo innecesario)
+- **NO** implementar funcionalidades no requeridas
+- **SÍ** priorizar funcionalidad sobre diseño visual
+- **SÍ** usar convenciones Laravel estándar
+- **SÍ** mantener código simple y directo
+- **SÍ** testear cada endpoint al crearlo
+
+### Troubleshooting Vite + pnpm
+
+**Problemas comunes y soluciones rápidas:**
+
+```bash
+# Si pnpm no está instalado globalmente
+npm install -g pnpm
+
+# Limpiar caché si hay problemas de dependencias
+pnpm store prune
+
+# Reinstalar dependencias completamente
+rm -rf node_modules pnpm-lock.yaml
+pnpm install
+
+# Verificar que el proxy funcione (CORS)
+# En vite.config.js, asegurar configuración de proxy correcta
+
+# Si el puerto 3000 está ocupado
+pnpm dev --port 3001
+```
+
+---
+
+**Recuerda:** Este es un ejercicio de velocidad y precisión. La clave está en implementar exactamente lo requerido, en el orden correcto, sin desviarse hacia funcionalidades "nice to have".
