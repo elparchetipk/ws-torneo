@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Día 5: Validar Entorno Competencia",
+      "type": "shell",
+      "command": "echo '🏁 INICIANDO VALIDACIÓN DEL ENTORNO DE COMPETENCIA' && echo '📂 Estructura del día 5:' && ls -la /home/epti/Documentos/sena/ws-torneo/docs/training/day-05/ && echo '' && echo '🔧 Verificando herramientas:' && echo '- PHP:' && php --version | head -1 && echo '- Composer:' && composer --version | head -1 && echo '- Node.js:' && node --version && echo '- NPM:' && npm --version && echo '' && echo '✅ ENTORNO LISTO PARA SIMULACROS DE COMPETENCIA'",
+      "group": "test",
+      "isBackground": false,
+      "problemMatcher": []
+    }
+  ]
+}
